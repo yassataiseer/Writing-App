@@ -12,14 +12,15 @@
     <li><a  href="/home">Home</a></li>
       <form method = "POST">
     <li><a href="/story" >New Story</a></li>
-      </form>
+      <li> <a href="#null"> Your Stories </a></li>
     <li><a href="#contact">Login</a></li>
     <li><a href="#about">Sign-up</a></li>
   </ul>
   <br>
 
   <div style="padding:20px;margin-top:30px;background-color:#6699ff;height:1500px;text-align:center">
-    <form name="search" action="." style="text-align:center" method="POST">
+    <fieldset>
+<form name="search" action="." style="text-align:center" method="POST">
 
 
 <h1 > Welcome to Story Maker </h1>
@@ -28,20 +29,8 @@
 <h2 > Enter Title:</h2> 
 <textarea  name = "title"> </textarea>
 
-<h2> Genres (check all that apply)</h2>
-<input type="checkbox" id="fiction" name="fiction" value="fiction"><label for="fiction"> Fiction</label><input type="checkbox" id="non-fiction" name="non-fiction" value="non--fiction"><label for="non-fiction"> non-fiction</label><br>
-<br>
-
-
-<input type="checkbox" id="mystery" name="mystery" value="mystery"><label for="mystery"> Mystery </label><input type="checkbox" id="thriller" name="thriller" value="thriller"><label for="thriller"> Thriller </label><br>
-
-<input type="checkbox" id="historical" name="historical" value="historical"><label for="historical"> Historical </label><input type="checkbox" id="science" name="science" value="science"><label for="science"> Sci-fi </label><br>
-
-
-
-<input type="checkbox" id="comedy" name="comedy" value="comedy">
-<label for="comedy"> Comedy </label><br>
-<br>
+<h2> What types of genres is this story?</h2>
+<textarea name="genres"  rows="1"> </textarea>
 
 
 
@@ -50,23 +39,24 @@
 
 <h2 > Paste Story Text (No word limit):</h2> 
 
-<textarea  rows="10" cols="50"> </textarea>
+<textarea  rows="10" cols="50" name="story"> </textarea>
 
 
 <h2 > Enter Writer Name</h2>
 <h6>(If you don't want to write it leave as "Anonymous") :</h6>
-<textarea rows="1"> </textarea>
+<textarea rows="1" name="name"> </textarea>
 
 <br>
 <br>
 <br>
 <br>
-<input type="submit" value="submit" class="button" >
-    </form>
+<input type="submit"   value="submit" class="button" >
+
 
 
 
 </div>
 
-
+</form>
+</fieldset>
 </html>
