@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='test.css') }}">
 
     <link rel="stylesheet" type="text/css" href="test.css">
+    
 </head>
 
 </style>
@@ -17,19 +18,39 @@
     <form method = "POST">
   <li><a href="/story" >New Story</a></li>
     </form>
-  <li> <a href="#null">  Your stories</a></li>
-  <li><a href="#contact">Login</a></li>
+
+  <li><a href="/login">Login</a></li>
   <li><a href="#about">Sign-up</a></li>
 </ul>
 
-<div style="padding:20px;margin-top:30px;background-color:#6699ff;height:1500px;">
-  <h1>Here are your stories</h1>
-<h2>  {{title}} </h2>
+<div style="padding:20px;margin-top:30px;background-color:#ffffcc;height:1500px;">
+  <h1>Here are your stories :)</h1>
+  <table>
+    {% for item in items %}
+    <tr>
+        <td>{{item}}</td>
 
-<h2>  {{genres}} </h2>
-<h2>  {{birthday}} </h2>
-<h2>  {{story}} </h2>
-<h2>  {{name}} </h2>
+    </td>
+    {% endfor %}
+  
+  </table>
+  <script type="text/javascript"charset="utf-8">
+    d3.text("data.csv", function(data) {
+        var parsedCSV = d3.csv.parseRows(data);
+
+        var container = d3.select("body")
+            .append("table")
+
+            .selectAll("tr")
+                .data(parsedCSV).enter()
+                .append("tr")
+
+            .selectAll("td")
+                .data(function(d) { return d; }).enter()
+                .append("td")
+                .text(function(d) { return d; });
+    });
+</script>
 </div>
 
 </body>

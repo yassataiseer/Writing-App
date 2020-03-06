@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<title>Subcounter</title>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='test.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="test.css">
+</head>
+
+</style>
+</head>
+<body>
+
+<ul>
+  <li><a  href="/home">Home</a></li>
+    <form method = "POST">
+  <li><a href="/story" >New Story</a></li>
+    </form>
+
+  <li><a href="/login">Login</a></li>
+  <li><a href="/signup">Sign-up</a></li>
+</ul>
+
+
+<div style="padding:20px;margin-top:30px;background-color:#ffffcc;height:1500px;">
+    <form name="login101" action="/login101" style="text-align:center" method="POST">
+
+<h2> Enter Username</h2><input type="input" id="username1" name="username1">
+
+<h2> Enter password</h2><input type="password" id="pascode1" name="pascode1">
+<br>
+<br>
+<input type="submit"   value="submit" class="button" >
+    </form>
+</body>
+</html>
