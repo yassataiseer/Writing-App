@@ -67,17 +67,23 @@ def values():
 
 @app.route("/sign", methods=['POST'])
 def sign():
+    print('11111')
     username = request.form['username']
     password = request.form['pascode']
+    print(username)
     c.execute("INSERT INTO RecordONE (Username, Password) VALUES(?, ?)", (username, password)) 
-    c.execute("SELECT * FROM RecordONE ")
+    c.execute("SELECT Username, password FROM RecordONE")
+    
     rows = c.fetchall()
+    print(rows)
+    print(username)
     for row in rows:
-        if row[0]==username:
+        if row[0]==username or row[0]=='':
+            print(row)
             return 'this Userame is already used please try anotherone'
-        else:
-            conn.commit() 
-            return render_template("home.html", username = username, password=password)
+    
+    conn.commit() 
+    return render_template("home.html", username = username, password=password)
 
 
 @app.route("/login101", methods=['POST'])
