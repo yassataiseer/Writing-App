@@ -13,7 +13,7 @@
 <body>
 
 <ul>
-  <li><a  href="/home">Your stories</a></li>
+  <li><a  href="/home">Home</a></li>
     <form method = "POST">
   <li><a href="/story" >New Story</a></li>
     </form>
@@ -23,11 +23,11 @@
 </ul>
 
 
-<div style="padding:20px;margin-top:30px;background-color:#ffffcc;height:1500px;">
+<div style="padding:20px;margin-top:30px;background-color:#ff9d00;height:1500px;">
 <form name="sign" action="/sign" style="text-align:center" method="POST">
-<h2> Make a  Username</h2><input type="input" id="username" name="username">
+<h2> Make a  Username</h2><input type="input" id="username" name="username" required>
 
-<h2> Make a  password</h2><input type="password" id="pascode" name="pascode">
+<h2> Make a  password</h2><input type="password" id="pascode" name="pascode" required> 
 <br>
 <br>
 <input type="submit"   value="submit" class="button" >

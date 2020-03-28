@@ -1,16 +1,20 @@
 from flask import Flask, render_template,request,session, url_for
 import json
+from flask_sqlalchemy import SQLAlchemy
 import urllib.request
 import sqlite3 
 import csv
 import openpyxl
 import pandas as pd 
-conn = sqlite3.connect('data1.db', check_same_thread=False) 
-c = conn.cursor() 
-c.execute('CREATE TABLE IF NOT EXISTS RecordONE (Username TEXT , Password TEXT)') 
+
 app = Flask(__name__)
-
-
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS']= False
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
+db= SQLAlchemy(app)
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    Username = db.Column(db.Text)
+    Password = db.Column(db.Integer)
 @app.route("/")
 def index():
     print('1')
@@ -61,7 +65,6 @@ def values():
         print(file)
         file.close()
     items = title,genres,date,story,name
-
     print(items[0])
     return render_template("home.html",items=items)
 
@@ -71,19 +74,17 @@ def sign():
     username = request.form['username']
     password = request.form['pascode']
     print(username)
-    c.execute("INSERT INTO RecordONE (Username, Password) VALUES(?, ?)", (username, password)) 
-    c.execute("SELECT Username, password FROM RecordONE")
+    user = User(Username=username, Password=password)
     
-    rows = c.fetchall()
-    print(rows)
+    user1 = User.query.filter_by(Username=username).first()
     print(username)
-    for row in rows:
-        if row[0]==username or row[0]=='':
-            print(row)
-            return 'this Userame is already used please try anotherone'
-    
-    conn.commit() 
-    return render_template("home.html", username = username, password=password)
+
+    if user1 is not None or username==''or password=='':
+            return 'this Userame is already used please try anotherone or you have left a passage blank'
+    else:
+        db.session.add(user)
+        db.session.commit()
+        return render_template("home.html", username = username, password=password)
 
 
 @app.route("/login101", methods=['POST'])
@@ -91,13 +92,12 @@ def login101():
     username = request.form['username1']
     password = request.form['pascode1']
     print(username)
-    c.execute("SELECT * FROM RecordONE ")
-    rows = c.fetchall()
-    for row in rows:
-        if row[0]==username and row[1] ==password:
-            return render_template("home.html")
-    
-    return "Invalid creds"
+    existing_user = User.query.filter_by(Username=username).first()
+    pasword_checker = User.query.filter_by(Password=password).first()
+    if existing_user is not None or pasword_checker is not None or username==''or password=='' :
+        return render_template("home.html")
+    else:
+        return "Invalid creds"
 
 if __name__ == '__main__':
     app.run(debug=True)
